@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+
+  body
+
+    .container.mt-4
+      h1 Список постов
+
+      .row
+        .col-md-8
+
+            - if @posts.any?
+              .row.row-cols-1.gy-4
+                - @posts.each do |post|
+                  .col
+                    .card.shadow-sm
+                      .card-body
+                        h5.card-title = post.title
+                        p.card-text.text-muted Категория: #{post.category.name}
+                        p.card-text.text-muted Автор: #{post.creator.email}
+                        p.card-text.mt-2 = truncate(post.body, length: 150)
+            - else
+              .alert.alert-info Нет постов для отображения.
+
+        .col-md-4
+          - if user_signed_in?
+            h2 Новый пост
+
+            = simple_form_for @post, url: posts_path do |f|
+                = f.input :title, label: 'Заголовок', required: true, input_html: { class: 'form-control' }
+                = f.input :body, label: 'Текст поста', as: :text, required: true, input_html: { rows: 5, class: 'form-control' }
+                = f.input :category_id, label: 'Категория', collection: @categories, prompt: 'Выберите категорию', required: true, input_html: { class: 'form-select' }
+                = f.button :submit, 'Создать пост', class: 'btn btn-primary mt-2'

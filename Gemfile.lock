@@ -116,6 +116,7 @@ GEM
     erubi (1.13.1)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.2-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hpricot (0.8.6)
@@ -270,6 +271,14 @@ GEM
       ruby-lsp (>= 0.24.0, < 0.25.0)
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     securerandom (0.4.1)
     selenium-webdriver (4.33.0)
       base64 (~> 0.2)
@@ -283,6 +292,9 @@ GEM
     sentry-ruby (5.25.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    simple_form (5.3.1)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -364,9 +376,11 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   ruby-lsp-rails
+  sassc-rails
   selenium-webdriver
   sentry-rails
   sentry-ruby
+  simple_form
   slim-rails
   slim_lint
   sprockets-rails
