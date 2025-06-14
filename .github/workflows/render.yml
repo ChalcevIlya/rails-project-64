@@ -22,21 +22,21 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: '3.2.2'
           bundler-cache: true
 
       - run: |
           make setup
           make test
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     if: ${{ github.event_name == 'push' }}
 
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Deploy
-        run: |
-          curl ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+#       - name: Deploy
+#         run: |
+#           curl ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
