@@ -1,4 +1,5 @@
 AllCops:
+  SuggestExtensions: false
   DisplayCopNames: true
   Exclude:
     - "bin/**"
@@ -34,7 +35,7 @@ Metrics/PerceivedComplexity:
 Rails:
   Enabled: true
 
-require:
+plugins:
   - rubocop-performance
   - rubocop-rails
 
