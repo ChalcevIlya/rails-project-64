@@ -30,20 +30,18 @@ jobs:
           make test
 
   lint:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      
       - run: |
           make lint
 
   test:
+    needs: build
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
-      
+    steps:  
       - run: |
           make test
 
