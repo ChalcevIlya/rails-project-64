@@ -29,6 +29,20 @@ jobs:
           make setup
           make test
 
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          make lint
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          make test
+
   # deploy:
   #   needs: build
   #   runs-on: ubuntu-latest

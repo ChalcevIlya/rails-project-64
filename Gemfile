@@ -31,6 +31,10 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+gem 'slim-rails'
+gem "sentry-ruby"
+gem "sentry-rails"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -41,21 +45,28 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
-
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'sqlite3'
+  gem 'slim_lint'
+  gem 'faker'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'html2slim'
+  gem 'i18n-debug'
+  gem 'ruby-lsp-rails'
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'minitest-power_assert'
+  gem 'webdrivers'
 end
 
 group :production do

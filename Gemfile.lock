@@ -105,10 +105,17 @@ GEM
     drb (2.2.3)
     erb (5.0.1)
     erubi (1.13.1)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hpricot (0.8.6)
+    html2slim (0.2.0)
+      hpricot
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    i18n-debug (1.2.0)
+      i18n (< 2)
     io-console (0.8.0)
     irb (1.15.2)
       pp (>= 0.6.0)
@@ -135,6 +142,9 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.5)
+    minitest-power_assert (0.3.1)
+      minitest
+      power_assert (>= 1.1)
     msgpack (1.8.0)
     net-imap (0.5.8)
       date
@@ -153,6 +163,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    power_assert (2.0.5)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -203,6 +214,8 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.3.0)
+    rbs (3.9.4)
+      logger
     rdoc (6.14.0)
       erb
       psych (>= 4.0.0)
@@ -234,10 +247,13 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.44.0, < 2.0)
-    rubocop-rails-omakase (1.1.0)
-      rubocop (>= 1.72)
-      rubocop-performance (>= 1.24)
-      rubocop-rails (>= 2.30)
+    ruby-lsp (0.24.1)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 1.2, < 2.0)
+      rbs (>= 3, < 5)
+      sorbet-runtime (>= 0.5.10782)
+    ruby-lsp-rails (0.4.6)
+      ruby-lsp (>= 0.24.0, < 0.25.0)
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
     securerandom (0.4.1)
@@ -247,6 +263,24 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.25.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.25.0)
+    sentry-ruby (5.25.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    slim-rails (3.7.0)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
+    slim_lint (0.33.0)
+      rexml (~> 3.2)
+      rubocop (>= 1.0, < 2.0)
+      slim (>= 3.0, < 6.0)
+    sorbet-runtime (0.5.12176)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -259,7 +293,9 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
+    temple (0.10.3)
     thor (1.3.2)
+    tilt (2.6.0)
     timeout (0.4.3)
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
@@ -275,6 +311,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webdrivers (5.2.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (~> 4.0)
     websocket (1.2.11)
     websocket-driver (0.8.0)
       base64
@@ -293,19 +333,31 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  faker
+  html2slim
+  i18n-debug
   jbuilder
   jsbundling-rails
+  minitest-power_assert
   pg
   puma (>= 5.0)
   rails (~> 7.2.0)
-  rubocop-rails-omakase
+  rubocop
+  rubocop-performance
+  rubocop-rails
+  ruby-lsp-rails
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
+  slim-rails
+  slim_lint
   sprockets-rails
   sqlite3
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
+  webdrivers
 
 BUNDLED WITH
    2.4.10
