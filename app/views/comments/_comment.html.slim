@@ -1,7 +1,7 @@
 .card.mt-2.ms-4
   .card-body
     p.text-muted = comment.user.email
-    p = comment.body
+    p = comment.content
 
     - if user_signed_in?
       = render partial: 'comments/form', locals: { post: comment.post, parent_id: comment.id }

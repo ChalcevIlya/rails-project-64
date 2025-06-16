@@ -16,7 +16,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('PostComment.count', 1) do
       post post_post_comments_path(@post), params: {
         post_comment: {
-          body: @root_comment.body
+          content: @root_comment.content
         }
       }
     end
@@ -30,7 +30,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('PostComment.count', 1) do
       post post_post_comments_path(@post), params: {
         post_comment: {
-          body: @reply_comment,
+          content: @reply_comment,
           parent_id: @root_comment.id
         }
       }
@@ -45,7 +45,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('PostComment.count') do
       post post_post_comments_path(@post), params: {
         post_comment: {
-          body: ''
+          content: ''
         }
       }
     end
