@@ -50,7 +50,8 @@ html
             li.nav-item
               = link_to t('sign_up'), new_user_registration_path, class: 'nav-link'
 
-    = yield
+    main.container.flex-grow-1.mt-5.pt-4.pb-5
+      = yield
 
   footer.footer.mt-auto.py-3.bg-light
     .container

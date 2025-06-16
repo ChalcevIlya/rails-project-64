@@ -22,22 +22,9 @@ html
                         p.card-text.text-muted #{t('posts.creator')} #{post.creator.email}
                         p.card-text.mt-2 = truncate(post.body, length: 150)
                         p.likes-count = "#{post.likes.count} likes"
-                        - if user_signed_in?
-                          - if post.likes.exists?(user: current_user)
-                            = button_to t('posts.unlike'), post_like_path(post), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo: false }
-                          - else
-                            = button_to t('posts.like'), post_like_path(post), method: :post, class: 'btn btn-sm btn-outline-primary', data: { turbo: false }
-                        - else
-                          = link_to t('posts.log_in_to_like'), new_user_session_path, class: 'btn btn-sm btn-outline-secondary'
 
                       .card-footer.bg-light
-                        h5 = t('comments.comments')
-
-                        - post.comments.arrange.each do |comment, children|
-                          = render partial: 'comments/comment', locals: { comment: comment, post: post, children: children }
-
-                        - if user_signed_in?
-                          = render partial: 'comments/form', locals: { post: post, parent_id: nil }
+                        = link_to t('posts.view'), post_path(post), class: 'btn btn-sm btn-outline-primary'
             - else
               .alert.alert-info t('posts.no_posts')
 

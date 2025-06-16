@@ -11,31 +11,31 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should like' do
     assert_difference('PostLike.count', 1) do
-      post post_like_path(@post)
+      post post_likes_path(@post)
     end
-    assert_redirected_to root_path(anchor: "post-#{@post.id}")
+    assert_redirected_to post_path(@post.id)
   end
 
   test 'should not like twice' do
-    post post_like_path(@post)
+    post post_likes_path(@post)
     assert_no_difference('PostLike.count') do
-      post post_like_path(@post)
+      post post_likes_path(@post)
     end
-    assert_redirected_to root_path(anchor: "post-#{@post.id}")
+    assert_redirected_to post_path(@post.id)
   end
 
   test 'should unlike a post' do
-    like = post post_like_path(@post)
+    like = post post_likes_path(@post)
     assert_difference('PostLike.count', -1) do
       delete post_like_path(@post, like)
     end
-    assert_redirected_to root_path(anchor: "post-#{@post.id}")
+    assert_redirected_to post_path(@post.id)
   end
 
   test 'should redirect not signed in users' do
     sign_out @user
     assert_no_difference('PostLike.count') do
-      post post_like_path(@post)
+      post post_likes_path(@post)
     end
     assert_redirected_to new_user_session_path
   end

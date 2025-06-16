@@ -13,9 +13,9 @@ class CommentsController < ApplicationController
     end
     Rails.logger.debug @comment.errors.full_messages
     if @comment.save
-      redirect_to root_path(anchor: "post-#{@post.id}"), notice: t('comments.created')
+      redirect_to post_path(@post.id), notice: t('comments.created')
     else
-      redirect_to root_path(anchor: "post-#{@post.id}"), alert: t('comments.not_created')
+      redirect_to post_path(@post.id), alert: t('comments.not_created')
     end
     Rails.logger.debug @comment.errors.full_messages
   end

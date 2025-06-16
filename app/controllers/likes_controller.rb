@@ -7,9 +7,9 @@ class LikesController < ApplicationController
   def create
     like = @post.likes.build(user: current_user)
     if like.save
-      redirect_to root_path(anchor: "post-#{@post.id}"), notice: t('posts.liked')
+      redirect_to post_path(@post.id), notice: t('posts.liked')
     else
-      redirect_to root_path(anchor: "post-#{@post.id}"), alert: like.errors.full_messages.to_sentence
+      redirect_to post_path(@post.id), alert: like.errors.full_messages.to_sentence
     end
   end
 
@@ -17,9 +17,9 @@ class LikesController < ApplicationController
     like = @post.likes.find_by(user: current_user)
     if like
       like.destroy
-      redirect_to root_path(anchor: "post-#{@post.id}"), notice: t('posts.unliked')
+      redirect_to post_path(@post.id), notice: t('posts.unliked')
     else
-      redirect_to root_path(anchor: "post-#{@post.id}"), alert: t('posts.like_not_found')
+      redirect_to post_path(@post.id), alert: t('posts.like_not_found')
     end
   end
 

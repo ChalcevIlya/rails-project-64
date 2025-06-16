@@ -52,6 +52,7 @@ en:
     body: "Text"
     create: "Create post"
     choose_category: "Choose category"
+    view: "View full post"
   comments:
     comments: "Comments"
     created: "Comment created"
