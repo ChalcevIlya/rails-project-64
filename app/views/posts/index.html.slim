@@ -6,7 +6,7 @@ html
   body
 
     .container.mt-4
-      h1 Список постов
+      h1 = t('posts.list')
 
       .row
         .col-md-8
@@ -15,15 +15,23 @@ html
               .row.row-cols-1.gy-4
                 - @posts.each do |post|
                   .col
-                    .card.shadow-sm
+                    .card.shadow-sm id="post-#{post.id}"
                       .card-body
                         h5.card-title = post.title
-                        p.card-text.text-muted Категория: #{post.category.name}
-                        p.card-text.text-muted Автор: #{post.creator.email}
+                        p.card-text.text-muted #{t('posts.category')} #{post.category.name}
+                        p.card-text.text-muted #{t('posts.creator')} #{post.creator.email}
                         p.card-text.mt-2 = truncate(post.body, length: 150)
+                        p.likes-count = "#{post.likes.count} likes"
+                        - if user_signed_in?
+                          - if post.likes.exists?(user: current_user)
+                            = button_to t('posts.unlike'), post_like_path(post), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo: false }
+                          - else
+                            = button_to t('posts.like'), post_like_path(post), method: :post, class: 'btn btn-sm btn-outline-primary', data: { turbo: false }
+                        - else
+                          = link_to t('posts.log_in_to_like'), new_user_session_path, class: 'btn btn-sm btn-outline-secondary'
 
                       .card-footer.bg-light
-                        h5 Комментарии:
+                        h5 = t('comments.comments')
 
                         - post.comments.arrange.each do |comment, children|
                           = render partial: 'comments/comment', locals: { comment: comment, post: post, children: children }
@@ -31,14 +39,14 @@ html
                         - if user_signed_in?
                           = render partial: 'comments/form', locals: { post: post, parent_id: nil }
             - else
-              .alert.alert-info Нет постов для отображения.
+              .alert.alert-info t('posts.no_posts')
 
         .col-md-4
           - if user_signed_in?
-            h2 Новый пост
+            h2 = t('posts.new')
 
             = simple_form_for @post, url: posts_path do |f|
-                = f.input :title, label: 'Заголовок', required: true, input_html: { class: 'form-control' }
-                = f.input :body, label: 'Текст поста', as: :text, required: true, input_html: { rows: 5, class: 'form-control' }
-                = f.input :category_id, label: 'Категория', collection: @categories, prompt: 'Выберите категорию', required: true, input_html: { class: 'form-select' }
-                = f.button :submit, 'Создать пост', class: 'btn btn-primary mt-2'
+                = f.input :title, label: t('posts.title'), required: true, input_html: { class: 'form-control' }
+                = f.input :body, label: t('posts.body'), as: :text, required: true, input_html: { rows: 5, class: 'form-control' }
+                = f.input :category_id, label: t('posts.category'), collection: @categories, prompt: t('posts.choose_category'), required: true, input_html: { class: 'form-select' }
+                = f.button :submit, t('posts.create'), class: 'btn btn-primary mt-2'

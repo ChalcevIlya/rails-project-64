@@ -28,9 +28,33 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+
+  main_page: "Main page"
+  log_in: "Log in"
+  sign_up: "Sign up"
+  log_out: "Log out"
+  greeting: "Hello, %{user}"
+
   posts:
+    list: "Post list"
+    category: "Category"
+    creator: "Creator"
     created: "Post created"
+    like: "Like"
+    unlike: "Unlike"
+    liked: "Post liked"
+    unliked: "Post unliked"
+    like_not_found: "Like not found"
+    log_in_to_like: "Please, log in to like posts"
+    no_posts: "There are no posts to show"
+    new: "New post"
+    title: "Title"
+    body: "Text"
+    create: "Create post"
+    choose_category: "Choose category"
   comments:
+    comments: "Comments"
     created: "Comment created"
     not_created: "Comment not created"
+    placeholder_create: "Your comment"
+    reply: "Reply"

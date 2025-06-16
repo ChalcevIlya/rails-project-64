@@ -16,7 +16,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
     get posts_url
     assert_response :success
-    assert_select 'h1', 'Список постов'
+    assert_select 'h1', I18n.t('posts.list')
   end
 
   test 'should create valid post' do

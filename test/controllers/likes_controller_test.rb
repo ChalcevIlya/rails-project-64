@@ -1,0 +1,42 @@
+# frozen_string_literal: true
+
+require 'test_helper'
+
+class LikesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = users(:one)
+    @post = posts(:one)
+    sign_in @user
+  end
+
+  test 'should like' do
+    assert_difference('PostLike.count', 1) do
+      post post_like_path(@post)
+    end
+    assert_redirected_to root_path(anchor: "post-#{@post.id}")
+  end
+
+  test 'should not like twice' do
+    post post_like_path(@post)
+    assert_no_difference('PostLike.count') do
+      post post_like_path(@post)
+    end
+    assert_redirected_to root_path(anchor: "post-#{@post.id}")
+  end
+
+  test 'should unlike a post' do
+    like = post post_like_path(@post)
+    assert_difference('PostLike.count', -1) do
+      delete post_like_path(@post, like)
+    end
+    assert_redirected_to root_path(anchor: "post-#{@post.id}")
+  end
+
+  test 'should redirect not signed in users' do
+    sign_out @user
+    assert_no_difference('PostLike.count') do
+      post post_like_path(@post)
+    end
+    assert_redirected_to new_user_session_path
+  end
+end

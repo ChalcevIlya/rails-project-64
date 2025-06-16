@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   resources :posts do
     resources :post_comments, only: [:create], controller: 'comments'
+    resource :like, only: %i[create destroy], controller: 'likes'
   end
   get 'posts/index'
   get 'home/index'
