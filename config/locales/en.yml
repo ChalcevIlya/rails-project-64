@@ -31,3 +31,6 @@ en:
   hello: "Hello world"
   posts:
     created: "Post created"
+  comments:
+    created: "Comment created"
+    not_created: "Comment not created"

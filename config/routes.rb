@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do
+    resources :post_comments, only: [:create], controller: 'comments'
+  end
   get 'posts/index'
   get 'home/index'
   devise_for :users

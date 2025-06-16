@@ -1,0 +1,10 @@
+.card.mt-2.ms-4
+  .card-body
+    p.text-muted = comment.user.email
+    p = comment.body
+
+    - if user_signed_in?
+      = render partial: 'comments/form', locals: { post: comment.post, parent_id: comment.id }
+
+    - children.each do |child, subchildren|
+      = render partial: 'comments/comment', locals: { comment: child, post: post, children: subchildren }

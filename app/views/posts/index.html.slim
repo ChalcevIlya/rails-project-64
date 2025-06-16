@@ -21,6 +21,15 @@ html
                         p.card-text.text-muted Категория: #{post.category.name}
                         p.card-text.text-muted Автор: #{post.creator.email}
                         p.card-text.mt-2 = truncate(post.body, length: 150)
+
+                      .card-footer.bg-light
+                        h5 Комментарии:
+
+                        - post.comments.arrange.each do |comment, children|
+                          = render partial: 'comments/comment', locals: { comment: comment, post: post, children: children }
+
+                        - if user_signed_in?
+                          = render partial: 'comments/form', locals: { post: post, parent_id: nil }
             - else
               .alert.alert-info Нет постов для отображения.
 

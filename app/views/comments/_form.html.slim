@@ -1,0 +1,5 @@
+= simple_form_for [post, PostComment.new] do |f|
+  = f.hidden_field :parent_id, value: parent_id
+  .mb-2
+    = f.input :body, label: false, placeholder: 'Ваш комментарий', input_html: { rows: 3 }
+  = f.button :submit, 'Ответить', class: 'btn btn-sm btn-outline-secondary'
