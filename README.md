@@ -1,6 +1,7 @@
 # README
 
 [![Main](https://github.com/ChalcevIlya/rails-project-64/actions/workflows/render.yml/badge.svg?branch=main)](https://github.com/ChalcevIlya/rails-project-64/actions/workflows/render.yml)
+[![Main](https://github.com/ChalcevIlya/rails-project-64/actions/workflows/hexlet-check.yml/badge.svg?branch=main)](https://github.com/ChalcevIlya/rails-project-64/actions/workflows/hexlet-check.yml)
 
 ## Deployed Project
 
