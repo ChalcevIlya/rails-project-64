@@ -14,6 +14,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @categories = Category.all
+    redirect_to new_user_session_path, notice: t('not_logged_in') unless user_signed_in?
   end
 
   def create

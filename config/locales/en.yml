@@ -34,6 +34,7 @@ en:
   sign_up: "Sign up"
   log_out: "Log out"
   greeting: "Hello, %{user}"
+  not_logged_in: "You need to log in before creating posts."
 
   posts:
     list: "Post list"
@@ -45,6 +46,7 @@ en:
     liked: "Post liked"
     unliked: "Post unliked"
     like_not_found: "Like not found"
+    likes_too_fast: "Not so fast :)"
     log_in_to_like: "Please, log in to like posts"
     no_posts: "There are no posts to show"
     new: "New post"

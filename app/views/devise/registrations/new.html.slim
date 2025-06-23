@@ -1,0 +1,34 @@
+h2.text-center.mb-4 Sign up
+
+.container
+  .row.justify-content-center
+    .col-md-6.col-lg-4
+
+      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'needs-validation' }) do |f|
+
+        .mb-3
+          = f.label :email, class: 'form-label'
+          = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', required: true
+          - if resource.errors[:email].any?
+            small.text-danger = resource.errors[:email].first
+
+        .mb-3
+          = f.label :password, class: 'form-label'
+          - if @minimum_password_length
+            .form-text.mb-1
+              = "#{@minimum_password_length} characters minimum"
+          = f.password_field :password, autocomplete: 'new-password', class: 'form-control', required: true
+          - if resource.errors[:password].any?
+            small.text-danger = resource.errors[:password].first
+
+        .mb-3
+          = f.label :password_confirmation, class: 'form-label'
+          = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', required: true
+          - if resource.errors[:password_confirmation].any?
+            small.text-danger = resource.errors[:password_confirmation].first
+
+        .d-grid
+          = f.submit 'Sign up', class: 'btn btn-primary'
+
+      .mt-3.text-center
+        = render 'devise/shared/links'

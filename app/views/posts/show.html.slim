@@ -1,24 +1,45 @@
-.card.shadow-sm id="post-#{@post.id}"
-  .card-body
-    h5.card-title = @post.title
-    p.card-text.text-muted #{t('posts.category')} #{@post.category.name}
-    p.card-text.text-muted #{t('posts.creator')} #{@post.creator.email}
-    p.card-text.mt-2 = @post.body
-    p.likes-count = "#{@post.likes.count} likes"
+.container.mt-4
+  .card.shadow-sm
+    .card-body
+      h1.card-title = @post.title
 
-    - if user_signed_in?
-      - if @post.likes.exists?(user: current_user)
-        = button_to t('posts.unlike'), post_like_path(@post, @post.likes.where(user: current_user)), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo: false }
+      p.text-muted.mb-2
+        = t('posts.category')
+        | : 
+        = @post.category.name
+
+      p.text-muted.mb-2
+        = t('posts.creator')
+        | : 
+        = @post.creator.email
+        |  — 
+        = "#{time_ago_in_words(@post.created_at)} ago"
+
+      hr
+
+      p.card-text = @post.body
+
+      .mt-3
+        span.text-muted
+          = @post.likes.count
+          |  
+          i.bi.bi-heart-fill.text-danger
+
+      - if user_signed_in?
+        - if @post.likes.exists?(user: current_user)
+          = button_to t('posts.unlike'), post_like_path(@post, @post.likes.where(user: current_user)), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo: false }
+        - else
+          = button_to t('posts.like'), post_likes_path(@post), method: :post, class: 'btn btn-sm btn-outline-primary', data: { turbo: false }
       - else
-        = button_to t('posts.like'), post_likes_path(@post), method: :post, class: 'btn btn-sm btn-outline-primary', data: { turbo: false }
-    - else
-      = link_to t('posts.log_in_to_like'), new_user_session_path, class: 'btn btn-sm btn-outline-secondary'
+        = link_to t('posts.log_in_to_like'), new_user_session_path, class: 'btn btn-sm btn-outline-secondary'
 
 .card-footer.bg-light
   h5 = t('comments.comments')
 
-  - @post.comments.arrange.each do |comment, children|
-    = render partial: 'comments/comment', locals: { comment: comment, post: @post, children: children }
-
   - if user_signed_in?
     = render partial: 'comments/form', locals: { post: @post, parent_id: nil }
+
+  hr
+
+  - @post.comments.arrange.each do |comment, children|
+    = render partial: 'comments/comment', locals: { comment: comment, post: @post, children: children }

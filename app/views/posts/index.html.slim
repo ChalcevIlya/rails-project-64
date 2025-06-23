@@ -4,37 +4,44 @@ html
     meta charset="UTF-8"
 
   body
-
     .container.mt-4
       h1 = t('posts.list')
 
       .row
         .col-md-8
+          - if @posts.any?
+            .row.row-cols-1.gy-4
+              - @posts.each do |post|
+                .col
+                  .card.shadow-sm id="post-#{post.id}"
+                    .card-body
+                      h5.card-title = post.title
 
-            - if @posts.any?
-              .row.row-cols-1.gy-4
-                - @posts.each do |post|
-                  .col
-                    .card.shadow-sm id="post-#{post.id}"
-                      .card-body
-                        h5.card-title = post.title
-                        p.card-text.text-muted #{t('posts.category')} #{post.category.name}
-                        p.card-text.text-muted #{t('posts.creator')} #{post.creator.email}
-                        p.card-text.mt-2 = truncate(post.body, length: 150)
-                        p.likes-count = "#{post.likes.count} likes"
+                      p.card-text.text-muted
+                        = t('posts.category')
+                        | : 
+                        = post.category.name
 
-                      .card-footer.bg-light
+                      p.card-text.mt-2 = truncate(post.body, length: 150)
+
+                    .card-footer.bg-light
+                      .d-flex.justify-content-between.align-items-center
+                        .text-muted.small
+                          = t('posts.creator')
+                          | : 
+                          = post.creator.email
+                          |  
+                          = "#{time_ago_in_words(post.created_at)} ago"
+
+                        .d-flex.align-items-center.gap-1
+                          span.text-muted.small
+                            = post.likes.count
+                            = ' '
+                            i.bi.bi-heart-fill.text-danger
+
+                      .mt-2
                         = link_to t('posts.view'), post_path(post), class: 'btn btn-sm btn-outline-primary'
-            - else
-              .alert.alert-info t('posts.no_posts')
+          - else
+            .alert.alert-info = t('posts.no_posts')
 
-        .col-md-4
-          - if user_signed_in?
-            h2 = t('posts.new')
 
-            = simple_form_for @post, url: posts_path do |f|
-                = f.input :title, label: t('posts.title'), required: true, input_html: { class: 'form-control' }
-                = f.input :body, label: t('posts.body'), as: :text, required: true, input_html: { rows: 5, class: 'form-control' }
-                = f.input :category_id, label: t('posts.category'), collection: @categories, prompt: t('posts.choose_category'),
-                  required: true, input_html: { class: 'form-select' }
-                = f.button :submit, t('posts.create'), class: 'btn btn-primary mt-2'

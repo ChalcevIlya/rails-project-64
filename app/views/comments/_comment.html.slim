@@ -1,10 +1,17 @@
-.card.mt-2.ms-4
+.card.mt-2.ms-4  data-controller="comment"
   .card-body
-    p.text-muted = comment.user.email
+    p.text-muted 
+      = comment.user.email
+      |  — 
+      = "#{time_ago_in_words(comment.created_at)} ago"
     p = comment.content
 
     - if user_signed_in?
-      = render partial: 'comments/form', locals: { post: comment.post, parent_id: comment.id }
+      button.btn.btn-sm.btn-link.text-primary type="button" data-action="click->comment#toggleReplyForm" data-comment-id="#{comment.id}"
+        = t('comments.reply')
+
+      .reply-form.mt-2.d-none data-comment-id="#{comment.id}"
+        = render partial: 'comments/form', locals: { post: comment.post, parent_id: comment.id }
 
     - children.each do |child, subchildren|
       = render partial: 'comments/comment', locals: { comment: child, post: post, children: subchildren }

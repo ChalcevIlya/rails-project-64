@@ -9,7 +9,7 @@ class LikesController < ApplicationController
     if like.save
       redirect_to post_path(@post.id), notice: t('posts.liked')
     else
-      redirect_to post_path(@post.id), alert: like.errors.full_messages.to_sentence
+      redirect_to post_path(@post.id), alert: t('posts.likes_too_fast')
     end
   end
 

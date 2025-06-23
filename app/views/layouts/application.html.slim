@@ -43,6 +43,9 @@ html
             li.nav-item
               = link_to t('log_out'), destroy_user_session_path, method: :delete, class: 'nav-link'
 
+            li.nav-item
+              = link_to t('posts.new'), new_post_path, class: 'nav-link'
+
           - else
             li.nav-item
               = link_to t('log_in'), new_user_session_path, class: 'nav-link'
