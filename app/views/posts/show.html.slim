@@ -5,14 +5,14 @@
 
       p.text-muted.mb-2
         = t('posts.category')
-        | : 
+        ' :
         = @post.category.name
 
       p.text-muted.mb-2
         = t('posts.creator')
-        | : 
+        ' :
         = @post.creator.email
-        |  — 
+        '  —
         = "#{time_ago_in_words(@post.created_at)} ago"
 
       hr
@@ -22,7 +22,7 @@
       .mt-3
         span.text-muted
           = @post.likes.count
-          |  
+          '
           i.bi.bi-heart-fill.text-danger
 
       - if user_signed_in?

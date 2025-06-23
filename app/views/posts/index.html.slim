@@ -19,7 +19,7 @@ html
 
                       p.card-text.text-muted
                         = t('posts.category')
-                        | : 
+                        ' :
                         = post.category.name
 
                       p.card-text.mt-2 = truncate(post.body, length: 150)
@@ -28,9 +28,9 @@ html
                       .d-flex.justify-content-between.align-items-center
                         .text-muted.small
                           = t('posts.creator')
-                          | : 
+                          ' :
                           = post.creator.email
-                          |  
+                          '
                           = "#{time_ago_in_words(post.created_at)} ago"
 
                         .d-flex.align-items-center.gap-1
@@ -43,5 +43,3 @@ html
                         = link_to t('posts.view'), post_path(post), class: 'btn btn-sm btn-outline-primary'
           - else
             .alert.alert-info = t('posts.no_posts')
-
-
