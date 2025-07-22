@@ -52,13 +52,12 @@ group :development, :test do
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
-
+  gem 'faker'
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'slim_lint'
   gem 'sqlite3'
-  gem 'faker'
 end
 
 group :development do
