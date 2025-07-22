@@ -1,7 +1,8 @@
 h2 = t('posts.new')
 
 = simple_form_for @post, url: posts_path do |f|
-    = f.input :title, label: t('posts.title'), required: true, input_html: { class: 'form-control' }
-    = f.input :body, label: t('posts.body'), as: :text, required: true, input_html: { rows: 5, class: 'form-control' }
-    = f.input :category_id, label: t('posts.category'), collection: @categories, prompt: t('posts.choose_category'), required: true, input_html: { class: 'form-select' }
+    = f.error_notification
+    = f.input :title, required: true
+    = f.input :body, as: :text, required: true
+    = f.association :category, prompt: t('posts.choose_category'), required: true
     = f.button :submit, t('posts.create'), class: 'btn btn-primary mt-2'

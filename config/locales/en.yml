@@ -55,9 +55,21 @@ en:
     create: "Create post"
     choose_category: "Choose category"
     view: "View full post"
+  
   comments:
     comments: "Comments"
     created: "Comment created"
     not_created: "Comment not created"
     placeholder_create: "Your comment"
     reply: "Reply"
+  
+  activerecord:
+    models:
+      post: "Post"
+      category: "Category"
+    attributes:
+      post:
+        title: "Title"
+        body: "Text"
+        category: "Category"
+

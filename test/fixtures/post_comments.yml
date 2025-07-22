@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 root_comment:
-  content: Root comment
+  content: <%= Faker::Lorem.sentence %>
   ancestry: /
   post: one
   user: one
 
 reply_comment:
-  content: Reply comment
+  content: <%= Faker::Lorem.sentence %>
   ancestry: <%= ActiveRecord::FixtureSet.identify(:root_comment) %>
   post: one
   user: two

@@ -5,7 +5,7 @@ require 'test_helper'
 class LikesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
-    @post = posts(:one)
+    @post = posts(:two)
     sign_in @user
   end
 
@@ -25,11 +25,11 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should unlike a post' do
-    like = post post_likes_path(@post)
+    like = post_likes(:one)
     assert_difference('PostLike.count', -1) do
-      delete post_like_path(@post, like)
+      delete post_like_path(like.post, like)
     end
-    assert_redirected_to post_path(@post.id)
+    assert_redirected_to post_path(like.post)
   end
 
   test 'should redirect not signed in users' do

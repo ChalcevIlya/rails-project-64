@@ -2,9 +2,9 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post
 
   def create
+    set_post
     like = @post.likes.build(user: current_user)
     if like.save
       redirect_to post_path(@post.id), notice: t('posts.liked')
@@ -14,6 +14,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
+    set_post
     like = @post.likes.find_by(user: current_user)
     if like
       like.destroy

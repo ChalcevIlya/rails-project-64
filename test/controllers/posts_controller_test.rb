@@ -19,12 +19,23 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h1', I18n.t('posts.list')
   end
 
+  test 'should show post' do
+    post = posts(:one)
+
+    get post_url(post)
+    assert_response :success
+    assert_select 'h1', text: post.title
+    assert_select 'p', text: post.body
+  end
+
   test 'should create valid post' do
     sign_in @user
     assert_difference('Post.count', 1) do
       post posts_url, params: { post: @post_params }
     end
-    assert_redirected_to root_path
+    created = Post.find_by(@post_params.merge(creator_id: @user.id))
+    assert { created }
+    assert_redirected_to post_path(created)
     follow_redirect!
     assert_select '.alert.alert-info', text: I18n.t('posts.created')
   end
@@ -35,6 +46,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('Post.count') do
       post posts_url, params: { post: invalid_params }
     end
-    assert_response :success
+    assert_response :unprocessable_entity
   end
 end

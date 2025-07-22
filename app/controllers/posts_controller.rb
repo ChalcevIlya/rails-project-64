@@ -1,30 +1,31 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
+
   def index
-    @posts = Post.order(created_at: :desc)
-    @post = Post.new
-    @categories = Category.all
+    @posts = Post.includes(:category, :creator).order(created_at: :desc)
   end
 
   def show
     @post = Post.includes(comments: :user).find(params[:id])
+    @likes = @post.likes
+    @comments = @post.comments
     @comment = PostComment.new
   end
 
   def new
     @post = Post.new
     @categories = Category.all
-    redirect_to new_user_session_path, notice: t('not_logged_in') unless user_signed_in?
   end
 
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to root_path, notice: t('posts.created')
+      redirect_to post_path(@post), notice: t('posts.created')
     else
-      @posts = Post.order(created_at: :desc)
-      render :index
+      @categories = Category.all
+      render :new, status: :unprocessable_entity
     end
   end
 

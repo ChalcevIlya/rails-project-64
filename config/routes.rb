@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :posts do
+  resources :posts, only: %i[create new show index] do
     resources :comments, only: [:create]
-    resources :likes, only: %i[create destroy], controller: 'likes'
+    resources :likes, only: %i[create destroy]
   end
-  get 'posts/index'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

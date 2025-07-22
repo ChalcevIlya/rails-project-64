@@ -21,6 +21,8 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
+    created = PostComment.find_by(content: @root_comment.content)
+    assert { created }
     assert_redirected_to post_path(@post.id)
     follow_redirect!
     assert_match I18n.t('comments.created'), response.body
