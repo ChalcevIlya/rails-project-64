@@ -20,6 +20,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    @post.likes_count = 0
     if @post.save
       redirect_to post_path(@post), notice: t('posts.created')
     else

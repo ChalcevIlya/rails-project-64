@@ -20,15 +20,15 @@
       p.card-text = @post.body
 
       .mt-3
-        span.text-muted.d-inline-flex.gap-10
-          = @post.likes_count
+        .d-inline-flex.align-items-center.gap-1
+          span.text-muted = @post.likes_count
 
-        - if user_signed_in? && @current_user_like
-          = link_to post_like_path(@post, @current_user_like), method: :delete do
-            i.bi.bi-heart-fill.text-danger
-        - else
-          = link_to post_likes_path(@post), method: :post do
-            i.bi.bi-heart.text-danger
+          - if user_signed_in? && @current_user_like
+            = link_to post_like_path(@post, @current_user_like), method: :delete do
+              i.bi.bi-heart-fill.text-danger
+          - else
+            = link_to post_likes_path(@post), method: :post do
+              i.bi.bi-heart.text-danger
 
     .card-footer.bg-light
       h5 = t('comments.comments')
