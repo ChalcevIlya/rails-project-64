@@ -13,15 +13,17 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create root comment' do
+    content = Faker::Lorem.sentence
+
     assert_difference('PostComment.count', 1) do
       post post_comments_path(@post), params: {
         post_comment: {
-          content: @root_comment.content
+          content: content
         }
       }
     end
 
-    created = PostComment.find_by(content: @root_comment.content)
+    created = PostComment.find_by(content: content)
     assert { created }
     assert_redirected_to post_path(@post.id)
     follow_redirect!

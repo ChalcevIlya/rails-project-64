@@ -11,7 +11,7 @@
         = t('comments.reply')
 
       .reply-form.mt-2.d-none data-comment-id="#{comment.id}"
-        = render partial: 'comments/form', locals: { post: post, parent_id: comment.id }
+        = render partial: 'comments/form', locals: { form_comment: @new_comment, post: post, parent_id: comment.id }
 
     - children.each do |child, subchildren|
       = render partial: 'comments/comment', locals: { comment: child, post: post, children: subchildren }

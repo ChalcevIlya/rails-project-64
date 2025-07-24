@@ -9,14 +9,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(comments: :user).find(params[:id])
-    @likes = @post.likes
-    @comments = @post.comments
-    @comment = PostComment.new
+    @current_user_like = @post.likes.find_by(user: current_user)
+    @comments = @post.comments.arrange
+    @new_comment = PostComment.new
   end
 
   def new
     @post = Post.new
-    @categories = Category.all
   end
 
   def create
@@ -24,7 +23,6 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post), notice: t('posts.created')
     else
-      @categories = Category.all
       render :new, status: :unprocessable_entity
     end
   end

@@ -23,23 +23,20 @@
         span.text-muted.d-inline-flex.gap-10
           = @post.likes_count
 
-        - if user_signed_in?
-          - if @likes.exists?(user: current_user)
+        - if user_signed_in? && @current_user_like
+          = link_to post_like_path(@post, @current_user_like), method: :delete do
             i.bi.bi-heart-fill.text-danger
-            = button_to t('posts.unlike'), post_like_path(@post, @likes.where(user: current_user)), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo: true }
-          - else
-            i.bi.bi-heart.text-danger
-            = button_to t('posts.like'), post_likes_path(@post), method: :post, class: 'btn btn-sm btn-outline-primary', data: { turbo: true }
         - else
-          = link_to t('posts.log_in_to_like'), new_user_session_path, class: 'btn btn-sm btn-outline-secondary'
+          = link_to post_likes_path(@post), method: :post do
+            i.bi.bi-heart.text-danger
 
-.card-footer.bg-light
-  h5 = t('comments.comments')
+    .card-footer.bg-light
+      h5 = t('comments.comments')
 
-  - if user_signed_in?
-    = render partial: 'comments/form', locals: { post: @post, parent_id: nil }
+      - if user_signed_in?
+        = render partial: 'comments/form', locals: { form_comment: @new_comment, post: @post, parent_id: nil }
 
-  hr
+      hr
 
-  - @comments.arrange.each do |comment, children|
-    = render partial: 'comments/comment', locals: { comment: comment, post: @post, children: children }
+      - @comments.each do |comment, children|
+        = render partial: 'comments/comment', locals: { comment: comment, post: @post, children: children }
